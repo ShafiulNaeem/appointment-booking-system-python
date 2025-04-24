@@ -1,4 +1,5 @@
+from app.utils.template import render_template
 class AuthController:
 
     def show_login(self):
-        return "Rift displaying login page"
+        return render_template("admin/login.html", {"title": "Login"})

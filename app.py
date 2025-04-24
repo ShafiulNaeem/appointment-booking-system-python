@@ -11,28 +11,21 @@ register_all_routes(router)
 class RequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         response, status = router.handle_request("GET", self.path)
-        print(f"Rift GET request for {self.path} - Status: {status} - Response: {response}")
         self.respond(response, status)
-
     
     def do_POST(self):
         form = self.get_post_data()
-        response, status = router.resolve("POST", self.path, form)
+        response, status = router.handle_request("POST", self.path, form)
         self.respond(response, status)
 
     def do_PUT(self):
         form = self.get_post_data()
-        response, status = router.resolve("PUT", self.path, form)
+        response, status = router.handle_request("PUT", self.path, form)
         self.respond(response, status)
 
     def do_DELETE(self):
         form = self.get_post_data()
-        response, status = router.resolve("DELETE", self.path, form)
-        self.respond(response, status)
-
-    def do_PATCH(self):
-        form = self.get_post_data()
-        response, status = router.resolve("PATCH", self.path, form)
+        response, status = router.handle_request("DELETE", self.path, form)
         self.respond(response, status)
 
     def get_post_data(self):

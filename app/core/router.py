@@ -20,7 +20,8 @@ class Router:
         self.routes["DELETE"][path] = handler
     
     def handle_request(self, method, path, form=None):
-        handler = self.routes.get(method, {}).get(path)
+        handler = self.routes.get(method, {}).get(path) 
+        # print(handler())
         if handler:
             return handler(form) if form else handler() ,200
         else:
