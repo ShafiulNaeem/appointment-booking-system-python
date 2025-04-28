@@ -1,0 +1,68 @@
+import os
+
+class File:
+    def get_mime_type(self, file_path):
+        if file_path.endswith('.css'):
+            return 'text/css'
+        elif file_path.endswith('.js'):
+            return 'application/javascript'
+        elif file_path.endswith('.png'):
+            return 'image/png'
+        elif file_path.endswith('.jpg') or file_path.endswith('.jpeg'):
+            return 'image/jpeg'
+        elif file_path.endswith('.gif'):
+            return 'image/gif'
+        elif file_path.endswith('.svg'):
+            return 'image/svg+xml'
+        elif file_path.endswith('.ico'):
+            return 'image/x-icon'
+        elif file_path.endswith('.html'):
+            return 'text/html'
+        elif file_path.endswith('.txt'):
+            return 'text/plain'
+        elif file_path.endswith('.json'):
+            return 'application/json'
+        elif file_path.endswith('.xml'):
+            return 'application/xml'
+        elif file_path.endswith('.pdf'):
+            return 'application/pdf'
+        elif file_path.endswith('.zip'):
+            return 'application/zip'
+        elif file_path.endswith('.tar'):
+            return 'application/x-tar'
+        elif file_path.endswith('.gz'):
+            return 'application/gzip'
+        elif file_path.endswith('.mp4'):
+            return 'video/mp4'
+        elif file_path.endswith('.mp3'):
+            return 'audio/mpeg'
+        elif file_path.endswith('.wav'):
+            return 'audio/wav'
+        elif file_path.endswith('.woff'):
+            return 'font/woff'
+        elif file_path.endswith('.woff2'):
+            return 'font/woff2'
+        elif file_path.endswith('.ttf'):
+            return 'font/ttf'
+        elif file_path.endswith('.otf'):
+            return 'font/otf'
+        elif file_path.endswith('.doc'):
+            return 'application/msword'
+        elif file_path.endswith('.docx'):
+            return 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        elif file_path.endswith('.xls'):
+            return 'application/vnd.ms-excel'
+        elif file_path.endswith('.xlsx'):
+            return 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        elif file_path.endswith('.ppt'):
+            return 'application/vnd.ms-powerpoint'
+        elif file_path.endswith('.pptx'):
+            return 'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+        elif file_path.endswith('.csv'):
+            return 'text/csv'
+        elif file_path.endswith('.yaml') or file_path.endswith('.yml'):
+            return 'application/x-yaml'
+        elif file_path.endswith('.md'):
+            return 'text/markdown'
+        else:
+            return 'application/octet-stream'

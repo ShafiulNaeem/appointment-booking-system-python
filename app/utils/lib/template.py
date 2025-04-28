@@ -17,6 +17,7 @@ def render_template(template_path, context={}):
 
     # Handle {{ title }} replacement
     content = _replace_variables(content, context)
+    # print(content)
 
     return content
 

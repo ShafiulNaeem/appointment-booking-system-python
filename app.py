@@ -3,15 +3,14 @@ from urllib.parse import parse_qs
 from app.core.router import Router
 from app.routes import register_all_routes
 
-
 # Initialize the router
 router = Router()
 register_all_routes(router)
 
 class RequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
-        response, status = router.handle_request("GET", self.path)
-        self.respond(response, status)
+        response, headers, status = router.handle_request("GET", self.path)
+        self.respond(response, headers, status)
     
     def do_POST(self):
         form = self.get_post_data()
@@ -33,15 +32,22 @@ class RequestHandler(BaseHTTPRequestHandler):
         raw_data = self.rfile.read(content_length).decode()
         return {k: v[0] for k, v in parse_qs(raw_data).items()}
 
-    def respond(self, response, status=200):
+    def respond(self, response, headers, status=200):
         self.send_response(status)
+    
+        for key, value in headers.items():
+            self.send_header(key, value)
         self.end_headers()
-        self.wfile.write(response.encode())
+
+        if isinstance(response, bytes):
+            self.wfile.write(response)
+        else:
+            self.wfile.write(response.encode())
 
 def run():
     server_address = ('', 8000)
     httpd = HTTPServer(server_address, RequestHandler)
-    print('Rift starting server on port 8000...')
+    print('Rifat starting server on port 8000...')
     httpd.serve_forever()
 
 if __name__ == '__main__':

@@ -1,3 +1,5 @@
+from app.utils.middleware.AcceptFile import AcceptFile
+
 class Router:
     def __init__(self):
         self.routes = {
@@ -6,6 +8,7 @@ class Router:
             "PUT": {},
             "DELETE": {}
         }
+        self.acceptFile = AcceptFile()
 
     def get(self, path, handler):
         self.routes["GET"][path] = handler
@@ -20,12 +23,21 @@ class Router:
         self.routes["DELETE"][path] = handler
     
     def handle_request(self, method, path, form=None):
+        # Check if the path is a file request
+        content, mime_type, status = self.acceptFile.handle_file(path)
+        if status == 200:
+            headers = {"Content-Type": mime_type}
+            return content, headers, 200
+        elif status == 404 and (path.startswith("/static") or path.startswith("/assets")):
+            return b"Static File Not Found", {"Content-Type": "text/plain"}, 404
+
         handler = self.routes.get(method, {}).get(path) 
-        # print(handler())
         if handler:
-            return handler(form) if form else handler() ,200
+            response = handler(form) if form else handler()
+            headers = {"Content-Type": "text/html"}
+            return response, headers,200
         else:
-            return "404 Not Found", 404
+            return "404 Not Found", {"Content-Type": "text/plain"}, 404
         
     
   

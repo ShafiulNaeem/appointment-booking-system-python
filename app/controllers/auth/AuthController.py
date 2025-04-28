@@ -1,4 +1,4 @@
-from app.utils.template import render_template
+from app.utils.lib.template import render_template
 class AuthController:
 
     def show_login(self):
