@@ -1,7 +1,7 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import parse_qs
 from app.core.router import Router
-from app.routes import register_all_routes
+from routes import register_all_routes
 
 # Initialize the router
 router = Router()
