@@ -1,4 +1,5 @@
 from app.utils.middleware.AcceptFile import AcceptFile
+from app.utils.lib.template import error404
 
 class Router:
     def __init__(self):
@@ -37,7 +38,7 @@ class Router:
             headers = {"Content-Type": "text/html"}
             return response, headers,200
         else:
-            return "404 Not Found", {"Content-Type": "text/plain"}, 404
+            return error404(), {"Content-Type": "text/html"}, 404
         
     
   
