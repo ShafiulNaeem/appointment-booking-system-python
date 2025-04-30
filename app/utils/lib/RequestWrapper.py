@@ -15,4 +15,4 @@ class RequestWrapper:
         _,form, files = parse_form_data(environ)
         for key in files.keys():
             form[key] = files[key]
-        return form, files
+        return form
