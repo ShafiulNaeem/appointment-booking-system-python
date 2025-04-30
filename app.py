@@ -1,7 +1,7 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
-from urllib.parse import parse_qs
 from app.core.router import Router
 from routes import register_all_routes
+from app.utils.lib.RequestWrapper import RequestWrapper
 
 # Initialize the router
 router = Router()
@@ -14,23 +14,24 @@ class RequestHandler(BaseHTTPRequestHandler):
     
     def do_POST(self):
         form = self.get_post_data()
-        response, status = router.handle_request("POST", self.path, form)
-        self.respond(response, status)
+        response, headers, status = router.handle_request("POST", self.path, form)
+        self.respond(response, headers, status)
 
     def do_PUT(self):
         form = self.get_post_data()
-        response, status = router.handle_request("PUT", self.path, form)
-        self.respond(response, status)
+        response, headers, status = router.handle_request("PUT", self.path, form)
+        self.respond(response, headers, status)
 
     def do_DELETE(self):
         form = self.get_post_data()
-        response, status = router.handle_request("DELETE", self.path, form)
-        self.respond(response, status)
+        response, headers, status = router.handle_request("DELETE", self.path)
+        self.respond(response, headers, status)
 
     def get_post_data(self):
-        content_length = int(self.headers.get('Content-Length', 0))
-        raw_data = self.rfile.read(content_length).decode()
-        return {k: v[0] for k, v in parse_qs(raw_data).items()}
+        content_length = int(self.headers['Content-Length'])
+        body = self.rfile.read(content_length)
+        form = RequestWrapper.parse_request(self.headers, body)
+        return form
 
     def respond(self, response, headers, status=200):
         self.send_response(status)

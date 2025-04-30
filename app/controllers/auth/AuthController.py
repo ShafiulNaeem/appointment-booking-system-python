@@ -6,3 +6,8 @@ class AuthController:
     
     def show_register(self):
         return render_template("admin/auth/register.html", {"title": "Register | ABS Admin"})
+    
+    def register(self,request):
+        print("request:",request)
+        exit()
+        pass

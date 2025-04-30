@@ -8,23 +8,28 @@
                                 src="../assets/images/logo/logo.png" alt="looginpage"><img class="img-fluid for-dark"
                                 src="../assets/images/logo/logo_dark.png" alt="looginpage"></a></div> -->
                     <div class="login-main">
-                        <form class="theme-form">
+                        <form class="theme-form" method="POST" action="/admin/register/store" enctype="multipart/form-data">
                             <h4>Create your account</h4>
                             <p>Enter your personal details to create account</p>
                             <div class="form-group">
-                                <label class="col-form-label pt-0">Your Name</label>
                                 <div class="row g-2">
+
                                     <div class="col-6">
-                                        <input class="form-control" type="text" required="" placeholder="First name">
+                                        <label class="col-form-label pt-0">Name</label>
+                                        <input class="form-control" type="text" name="name" value="" required=""
+                                            placeholder="name">
                                     </div>
                                     <div class="col-6">
-                                        <input class="form-control" type="text" required="" placeholder="Last name">
+                                        <label class="col-form-label pt-0">Phone</label>
+                                        <input class="form-control" type="text" phone="first_name" value=""
+                                            placeholder="phone">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-form-label">Email Address</label>
-                                <input class="form-control" type="email" required="" placeholder="Test@gmail.com">
+                                <label class="col-form-label">Email</label>
+                                <input class="form-control" type="email" required="" name="email" value=""
+                                    placeholder="Test@gmail.com">
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label">Password</label>
@@ -34,16 +39,19 @@
                                     <div class="show-hide"><span class="show"></span></div>
                                 </div>
                             </div>
-                            <div class="form-group mb-0">
-                                <div class="checkbox p-0">
-                                    <input id="checkbox1" type="checkbox">
-                                    <label class="text-muted" for="checkbox1">Agree with<a class="ms-2" href="#">Privacy
-                                            Policy</a></label>
-                                </div>
-                                <button class="btn btn-primary btn-block w-100" type="submit">Create Account</button>
+
+                            <div class="form-group">
+                                <label class="col-form-label">Image</label>
+                                <input class="form-control" name="image" type="file" aria-label="file example">
                             </div>
 
-                            <p class="mt-4 mb-0">Already have an account?<a class="ms-2" href="/admin/login">Sign in</a>
+                            <div class="form-group mb-0">
+                                <button class="btn btn-primary btn-block w-100" type="submit">Create
+                                    Account</button>
+                            </div>
+
+                            <p class="mt-4 mb-0">Already have an account?<a class="ms-2" href="/admin/login">Sign
+                                    in</a>
                             </p>
                         </form>
                     </div>
